@@ -27,6 +27,15 @@ class PromptRequest(BaseModel):
 class GeminiResponse(BaseModel):
     response: str
 
+def gemini_response(prompt: str) -> str:
+    try:
+        response = model.generate_content(prompt)
+        return response.text  # .text returns the generated string content
+    except Exception as e:
+        # Optional: log or print the error for debugging
+        print(f"[Gemini API Error] {e}")
+        raise
+
 @app.post("/api/generate-response", response_model=GeminiResponse)
 async def generate_response_endpoint(req: PromptRequest):
     prompt = req.prompt.strip()
