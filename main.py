@@ -30,10 +30,9 @@ class GeminiResponse(BaseModel):
 def gemini_response(prompt: str) -> str:
     try:
         response = model.generate_content(prompt)
-        return response.text  # .text returns the generated string content
+        return response.text  
     except Exception as e:
-        # Optional: log or print the error for debugging
-        print(f"[Gemini API Error] {e}")
+        #print(f"[Gemini API Error] {e}")
         raise
 
 @app.post("/api/generate-response", response_model=GeminiResponse)
